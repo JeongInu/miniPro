@@ -2,6 +2,94 @@
  * main.js - 북스토어 메인 페이지 스크립트
  */
 
+document.getElementById('logo').addEventListener('click', function () {
+  window.location.href = 'homepage.html';
+});
+
+const API_ADDR = "http://localhost:3001/";
+
+const footer = document.querySelector('footer');
+const toggleBtn = document.getElementById('toggle-footer');
+const body = document.body;
+const carousel = document.getElementById('recomanded');
+const leftBtn = document.querySelector('.carousel-btn.left');
+const rightBtn = document.querySelector('.carousel-btn.right');
+
+leftBtn.addEventListener('click', () => {
+  carousel.scrollBy({ left: -300, behavior: 'smooth' });
+});
+
+rightBtn.addEventListener('click', () => {
+  carousel.scrollBy({ left: 300, behavior: 'smooth' });
+});
+
+async function handleRecomanded(){
+  try{
+    const response = await fetch(API_ADDR+"NAVER_BOOK");
+    const data = await response.json();
+
+    console.log(data);
+
+    displayRecommanded(data);
+  }catch(error){
+    console.error(`API 통신 실패 ${error}`);
+  }
+}
+
+let currentIndex = 0;
+let bookList = [];
+
+function displayRecommanded(bookList) {
+  const $recomanded = document.getElementById('recomanded');
+  $recomanded.innerHTML = '';
+
+  bookList.forEach(book => {
+    const bookHtml = `
+      <div class="book">
+        <img src="${book.NB_IMAGE}" alt="${book.NB_TITLE}">
+        <p><strong>${book.NB_TITLE}</strong></p>
+        <p style="font-size: 0.9rem;">${book.NB_AUTHOR}</p>
+        <p style="color: #693111;">₩${book.NB_PRICE.toLocaleString()}</p>
+      </div>
+    `;
+    $recomanded.insertAdjacentHTML('beforeend', bookHtml);
+  });
+}
+
+rightBtn.addEventListener('click', () => {
+  if (carousel.scrollLeft + carousel.offsetWidth >= carousel.scrollWidth) {
+    carousel.scrollTo({ left: 0, behavior: 'smooth' });
+  } else {
+    carousel.scrollBy({ left: 300, behavior: 'smooth' });
+  }
+});
+
+leftBtn.addEventListener('click', () => {
+  if (carousel.scrollLeft === 0) {
+    carousel.scrollTo({ left: carousel.scrollWidth, behavior: 'smooth' });
+  } else {
+    carousel.scrollBy({ left: -300, behavior: 'smooth' });
+  }
+});
+
+handleRecomanded();
+
+toggleBtn.addEventListener('click', () => {
+  const isCollapsed = footer.classList.toggle('collapsed');
+
+  toggleBtn.textContent = isCollapsed ? '⬆️' : '⬇️';
+  
+  body.style.marginBottom = isCollapsed ? '40px' : '200px';
+
+  if (!isCollapsed) {
+    window.scrollBy({
+      top: 180,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
+});
+
 $(function() {
   setupLoginStatus();
   loadBooks();

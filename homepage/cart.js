@@ -124,6 +124,12 @@ $(function () {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const totalPrice = calculateTotal(cart);
 
+    if(cart.length===0){
+      alert("구매할 도서가 없어요.");
+      return;
+    }
+
+
     if (!member) {
       alert("회원 정보를 불러오지 못했습니다. 다시 시도해주세요.");
       return;

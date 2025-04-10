@@ -1,0 +1,129 @@
+/* 기본 스타일 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fdf8f1; /* 연노랑 주황빛 배경 */
+    padding: 20px;
+  }
+  
+  .container {
+    max-width: 450px;
+    margin: 0 auto;
+  }
+  
+  #loginForm{
+    margin-bottom: 20px;
+  }
+
+  .login-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  .login-title {
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  /* 입력 필드 */
+  .input-group {
+    margin-bottom: 10px;
+  }
+  
+  .form-label {
+    font-weight: bold;
+    color: #333;
+    display: block; /* label을 블록 요소로 만들어 줄바꿈 */
+    margin-bottom: 5px; /* label과 input 간의 간격 조정 */
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+  }
+
+  /* 로그인 버튼 */
+  .login-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #ffbc2a; /* 노란색 배경 */
+    color: white;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .login-btn:hover {
+    background-color: rgb(252, 149, 14); /* 버튼 hover 시 조금 더 어두운 노란색 */
+  }
+  
+  /* 아이디 찾기 링크 */
+  .link {
+    color: #007bff;
+    text-decoration: none;
+    padding-left: 320px;
+  }
+  
+  .link:hover {
+    text-decoration: underline;
+  }
+  
+  /* 소셜 로그인 버튼들 */
+
+  .text{
+    text-align: center;
+    padding-top: 20px;
+
+  }
+  .social-btns {
+    display: grid;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .social-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+  }
+  
+  .social-btn:hover {
+    color: white;
+  }
+  
+  .google-btn:hover {
+    background-color: #333;
+  }
+  
+  .naver-btn:hover {
+    background-color: #4caf50;
+  }
+  
+  .kakao-btn:hover {
+    background-color: #ff9800;
+  }
+  

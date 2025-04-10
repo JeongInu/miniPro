@@ -9,8 +9,9 @@
   <link rel="stylesheet" href="homepage.css">
 </head>
 <body>
+
   <header>
-    <div><strong>📚 Bookstore</strong></div>
+    <div id="logo"><strong>📚 Bookstore</strong></div>
     <nav>
       <a href="../meminfo/meminfo.html" style="display:none;">마이페이지</a>
       <a href="cart.html" class="button" style="display:none;">🛒 장바구니</a>
@@ -18,6 +19,17 @@
     </nav>
   </header>
   
+  <section class="recom-section">
+    <h2>추천 도서</h2>
+    <p>팀 시너지 추천 도서</p>
+
+    <div class="carousel-container">
+      <button class="carousel-btn left">←</button>
+      <div class="book-carousel" id="recomanded">
+      </div>
+      <button class="carousel-btn right">→</button>
+    </div>
+  </sction>
 
   <section class="section" id="newBooksSection">
     <h2>신간 도서</h2>
@@ -78,15 +90,20 @@
     </div>
   </section>
   
-
   <footer>
-    <h3>계약 문의</h3>
-    <p>저희 판매 사이트와 계약을 원하시는 출판사는 이메일을 입력해주세요! 담당자가 연락드리겠습니다. </p>
-    <div class="subscribe">
-      <input type="email" placeholder="출판사 이메일 입력">
-      <button>send</button>
+    <div id="footer">
+      <button id="toggle-footer"><span id="arrow">⬇️</span></button>
+      <p><b>계약 문의</b><p>
+      <p>저희 판매 사이트와 계약을 원하시는 출판사는 이메일을 입력해주세요! 담당자가 연락드리겠습니다. </p>
+      <div class="subscribe">
+        <input type="email" placeholder="출판사 이메일 입력">
+        <button>send</button>
+      </div>
+      <div class="team-name">Team Senergy</div>
+      <small class="ceo-name">대표이사 노지혜</small>
     </div>
   </footer>
+
 <script src="main.js"></script>
 </body>
 </html>
