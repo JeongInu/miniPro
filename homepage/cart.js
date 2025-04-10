@@ -163,10 +163,11 @@ $(function () {
       $('#final-price').text(`최종 결제 금액 : ${formatCurrency(totalPrice - usedPoints)}`);
     });
 
-    $(document).on('click', '#confirmBtn', function () {
+    $('#confirmBtn').on('click', function () {
       alert('결제가 완료되었습니다. 감사합니다!');
       localStorage.removeItem('cart');
-      location.reload();
+      $('#point-area').remove(); 
+      renderCartItems();
     });
   }
 });
