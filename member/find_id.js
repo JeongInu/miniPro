@@ -18,9 +18,12 @@ $(function () {
       }
   
       // JSON 파일에서 회원 정보 가져오기
-      $.getJSON('../data/data.json', function (data) {
-        const members = data.MEMBER;  // MEMBER 테이블의 모든 데이터 가져오기
-        let foundUser = null;  // 일치하는 회원이 있을 경우 저장할 변수
+      $.ajax({
+        url: 'http://localhost:3001/MEMBER', // JSON 서버 실행 주소
+        method: 'GET',
+        success: function (data) {
+          const members = data;
+          let foundUser = null; // 일치하는 회원이 있을 경우 저장할 변수
   
         // 회원 목록을 순회하면서 이름 + 이메일 또는 이름 + 휴대폰 번호가 일치하는 회원 찾기
         for (let member of members) {
@@ -40,10 +43,11 @@ $(function () {
         } else {
           alert('일치하는 정보가 없습니다.');  // 일치하는 회원이 없으면 안내 메시지
         }
-      }).fail(function () {
+      },
+      error: function (error) {
         // JSON 파일 로드 실패 시 에러 메시지
         alert('회원 정보를 불러오지 못했습니다. 다시 시도해주세요.');
-      });
+      }
     });
   });
-  
+});

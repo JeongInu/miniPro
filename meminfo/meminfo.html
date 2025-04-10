@@ -18,28 +18,18 @@
     
     <div class="tab-pane active" id="order">
       <h4>주문 내역</h4>
-      <table border="1" cellspacing="0" cellpadding="8">
+      <table id="orderMenu" border="1" cellspacing="0" cellpadding="8">
         <thead>
           <tr>
-            <th>날짜</th>
+            <th>순번</th>
+            <th>결제날짜</th>
             <th>주문번호</th>
             <th>결제금액</th>
             <th>포인트 변화</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>2025-04-09</td>
-            <td>#A123456</td>
-            <td>100</td>
-            <td>+500</td>
-          </tr>
-          <tr>
-            <td>2025-04-05</td>
-            <td>#A123455</td>
-            <td>100</td>
-            <td>-300</td>
-          </tr>
+        <tbody id="orderList">
+          <!-- 주문 내역이 JS로 삽입될 영역 -->
         </tbody>
       </table>
     </div>
