@@ -3,16 +3,27 @@ body {
     font-family: 'Noto Sans KR', sans-serif;
     background-color: #fff;
     color: #333;
+    margin-bottom: 200px;
+    margin-top: 80px;
   }
   
   header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 1rem 2rem; /* 좌우 넉넉하게 */
+    min-height: 70px; /* 최소 높이 지정 */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
-    border-bottom: 2px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    z-index: 1001;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
   }
-  
+
   header input[type="text"] {
     padding: 0.5rem;
     border: 1px solid #ccc;
@@ -77,12 +88,70 @@ body {
   }
   
   footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 180px;
     background-color: #f9f9f9;
-    padding: 2rem;
     text-align: center;
     border-top: 1px solid #ccc;
+    z-index: 1000;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+    transition: transform 0.5s ease;
+  }
+
+  footer.collapsed {
+    transform: translateY(160px);
+  }
+
+  footer .team-name {
+    margin-top: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    font-family: 'Georgia', serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.9;
+  }
+
+  footer .ceo-name {
+    display: block;
+    font-size: 0.75rem;
+    color: #666;
+    opacity: 0.8;
+  }
+
+  #toggle-footer {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 18px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
   }
   
+  #toggle-footer {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 18px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+  }
+
   .book p a {
     color: #693111;
     font-weight: bold;
@@ -92,11 +161,9 @@ body {
   .subscribe {
     display: flex;
     justify-content: center;
-    margin-top: 1rem;
   }
   
   .subscribe input[type="email"] {
-    padding: 0.5rem;
     width: 250px;
     border: 1px solid #ccc;
     border-radius: 4px 0 0 4px;
@@ -121,3 +188,61 @@ body {
     transform: translateY(0);
   }
   
+  .recom-section {
+    padding: 0 3rem;
+    margin-bottom: 2rem;
+  }
+
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 1rem 3rem;
+    box-sizing: border-box;
+  }
+  
+  .book-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 1rem;
+  }
+  
+  .book-carousel::-webkit-scrollbar {
+    display: none; /* 스크롤바 숨기기 */
+  }
+  
+  .book-carousel .book {
+    flex: 0 0 auto;
+    width: 140px;
+    text-align: center;
+  }
+  
+  .book img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  
+  .carousel-btn {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.3rem 0.8rem;
+    z-index: 10;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  }
+  
+  .carousel-btn.left {
+    left: 0;
+  }
+  
+  .carousel-btn.right {
+    right: 0;
+  }
