@@ -1312,7 +1312,7 @@
             "OD_TELE": "010-1234-5678",
             "OD_DEL": "택배",
             "OD_PAY": "신용카드",
-            "OD_USEPNT": 0.0,
+            "OD_USEPNT": 200.0,
             "OD_ADDPNT": 0.0
         },
         {
@@ -1326,7 +1326,7 @@
             "OD_DEL": "지하철",
             "OD_PAY": "카카오페이",
             "OD_USEPNT": 0.0,
-            "OD_ADDPNT": 0.0
+            "OD_ADDPNT": 100.0
         },
         {
             "ODNO": "1003",
@@ -1338,7 +1338,7 @@
             "OD_TELE": "010-3456-7890",
             "OD_DEL": "택배",
             "OD_PAY": "현금",
-            "OD_USEPNT": 0.0,
+            "OD_USEPNT": 500.0,
             "OD_ADDPNT": 0.0
         },
         {
@@ -1352,7 +1352,7 @@
             "OD_DEL": "택배",
             "OD_PAY": "신용카드",
             "OD_USEPNT": 0.0,
-            "OD_ADDPNT": 0.0
+            "OD_ADDPNT": 1000.0
         },
         {
             "ODNO": "1005",
@@ -1365,7 +1365,7 @@
             "OD_DEL": "지하철",
             "OD_PAY": "카카오페이",
             "OD_USEPNT": 0.0,
-            "OD_ADDPNT": 0.0
+            "OD_ADDPNT": 10000.0
         },
         {
             "ODNO": "1006",
@@ -1378,7 +1378,7 @@
             "OD_DEL": "택배",
             "OD_PAY": "페이코",
             "OD_USEPNT": 0.0,
-            "OD_ADDPNT": 0.0
+            "OD_ADDPNT": 100.0
         },
         {
             "ODNO": "1007",
@@ -1391,7 +1391,7 @@
             "OD_DEL": "택배",
             "OD_PAY": "현금",
             "OD_USEPNT": 0.0,
-            "OD_ADDPNT": 0.0
+            "OD_ADDPNT": 100.0
         },
         {
             "ODNO": "1008",
@@ -1403,7 +1403,7 @@
             "OD_TELE": "010-3535-8282",
             "OD_DEL": "택배",
             "OD_PAY": "페이코",
-            "OD_USEPNT": 0.0,
+            "OD_USEPNT": 200.0,
             "OD_ADDPNT": 0.0
         },
         {
@@ -1416,8 +1416,8 @@
             "OD_TELE": "010-5678-9012",
             "OD_DEL": "택배",
             "OD_PAY": "카카오페이",
-            "OD_USEPNT": 0.0,
-            "OD_ADDPNT": 0.0
+            "OD_USEPNT": 200.0,
+            "OD_ADDPNT": 220.0
         },
         {
             "ODNO": "1010",
@@ -1430,7 +1430,7 @@
             "OD_DEL": "택배",
             "OD_PAY": "신용카드",
             "OD_USEPNT": 0.0,
-            "OD_ADDPNT": 0.0
+            "OD_ADDPNT": 1000.0
         },
         {
             "ODNO": "1011",
@@ -1455,7 +1455,7 @@
             "OD_TELE": "010-1234-1234",
             "OD_DEL": "택배",
             "OD_PAY": "신용카드",
-            "OD_USEPNT": 0.0,
+            "OD_USEPNT": 50.0,
             "OD_ADDPNT": 1850.0
         },
         {
@@ -1481,8 +1481,8 @@
             "OD_TELE": "010-1234-1234",
             "OD_DEL": "택배",
             "OD_PAY": "신용카드",
-            "OD_USEPNT": 0.0,
-            "OD_ADDPNT": 0.0
+            "OD_USEPNT": 1500.0,
+            "OD_ADDPNT": 50.0
         },
         {
             "ODNO": "1015",
@@ -1494,7 +1494,7 @@
             "OD_TELE": "010-1234-5678",
             "OD_DEL": "택배",
             "OD_PAY": "신용카드",
-            "OD_USEPNT": 0.0,
+            "OD_USEPNT": 1000.0,
             "OD_ADDPNT": 0.0
         },
         {
@@ -1508,7 +1508,7 @@
             "OD_DEL": "지하철",
             "OD_PAY": "카카오페이",
             "OD_USEPNT": 0.0,
-            "OD_ADDPNT": 0.0
+            "OD_ADDPNT": 2000.0
         },
         {
             "ODNO": "1017",
@@ -1520,7 +1520,7 @@
             "OD_TELE": "010-4356-7890",
             "OD_DEL": "택배",
             "OD_PAY": "현금",
-            "OD_USEPNT": 0.0,
+            "OD_USEPNT": 2000.0,
             "OD_ADDPNT": 0.0
         },
         {
@@ -1534,7 +1534,7 @@
             "OD_DEL": "택배",
             "OD_PAY": "신용카드",
             "OD_USEPNT": 0.0,
-            "OD_ADDPNT": 0.0
+            "OD_ADDPNT": 11110.0
         },
         {
             "ODNO": "1019",
@@ -1546,8 +1546,8 @@
             "OD_TELE": "010-5678-9012",
             "OD_DEL": "택배",
             "OD_PAY": "카카오페이",
-            "OD_USEPNT": 0.0,
-            "OD_ADDPNT": 0.0
+            "OD_USEPNT": 100.0,
+            "OD_ADDPNT": 90.0
         },
         {
             "ODNO": "1020",
@@ -1560,7 +1560,7 @@
             "OD_DEL": "지하철",
             "OD_PAY": "카카오페이",
             "OD_USEPNT": 0.0,
-            "OD_ADDPNT": 0.0
+            "OD_ADDPNT": 100.0
         },
         {
             "ODNO": "1021",
@@ -1572,7 +1572,7 @@
             "OD_TELE": "010-1234-5678",
             "OD_DEL": "택배",
             "OD_PAY": "신용카드",
-            "OD_USEPNT": 0.0,
+            "OD_USEPNT": 1000.0,
             "OD_ADDPNT": 0.0
         },
         {
@@ -1586,7 +1586,7 @@
             "OD_DEL": "지하철",
             "OD_PAY": "현금",
             "OD_USEPNT": 0.0,
-            "OD_ADDPNT": 0.0
+            "OD_ADDPNT": 100.0
         },
         {
             "ODNO": "1023",
@@ -1598,8 +1598,8 @@
             "OD_TELE": "010-5678-9012",
             "OD_DEL": "택배",
             "OD_PAY": "카카오페이",
-            "OD_USEPNT": 0.0,
-            "OD_ADDPNT": 0.0
+            "OD_USEPNT": 50.0,
+            "OD_ADDPNT": 100.0
         },
         {
             "ODNO": "1024",
@@ -1611,7 +1611,7 @@
             "OD_TELE": "010-2345-6789",
             "OD_DEL": "택배",
             "OD_PAY": "카카오페이",
-            "OD_USEPNT": 0.0,
+            "OD_USEPNT": 100.0,
             "OD_ADDPNT": 0.0
         },
         {
@@ -1625,7 +1625,7 @@
             "OD_DEL": "지하철",
             "OD_PAY": "신용카드",
             "OD_USEPNT": 0.0,
-            "OD_ADDPNT": 0.0
+            "OD_ADDPNT": 100.0
         },
         {
             "ODNO": "1026",
@@ -1637,7 +1637,7 @@
             "OD_TELE": "010-1234-5678",
             "OD_DEL": "택배",
             "OD_PAY": "신용카드",
-            "OD_USEPNT": 0.0,
+            "OD_USEPNT": 100.0,
             "OD_ADDPNT": 0.0
         }
     ]
