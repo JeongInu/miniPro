@@ -9,7 +9,7 @@
   <div class="container mt-5" style="max-width: 450px;">
     <h2 class="mb-4 text-center">로그인</h2>
 
-    <form>
+    <form id="loginForm">
       <div class="mb-3">
         <label for="loginId" class="form-label">아이디</label>
         <input type="text" class="form-control" id="loginId" required>
@@ -21,6 +21,10 @@
 
       <button type="submit" class="btn btn-primary w-100" id="loginBtn">로그인</button>
 
+      <!-- 아이디 찾기 버튼 -->
+      <div class="d-flex justify-content-end mt-2">
+        <a href="find_id.html" class="btn btn-link btn-sm p-0">아이디 찾기</a>
+      </div>
     </form>
 
     <hr class="my-4">
@@ -38,6 +42,3 @@
   <script src="login.js"></script>
 </body>
 </html>
-
-
-
