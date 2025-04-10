@@ -3,7 +3,7 @@
  */
 
 $(function() {
-  // 메인 페이지 기능 초기화
+  setupLoginStatus();
   loadBooks();
   setupGenreFilter();
   setupEmailSubscription();
@@ -195,3 +195,27 @@ $('#monthFilter').on('change', function() {
   const selected = parseInt($(this).val());
   filterNewBooks(selected);
 });
+
+function setupLoginStatus() {
+  const loginMNO = localStorage.getItem('loginMNO'); // 로그인된 경우 저장되어 있어야 함
+
+  if (loginMNO) {
+    // 로그인 상태 → 로그인 버튼을 로그아웃으로 변경
+    $('.login-button').replaceWith('<button class="logout-button">로그아웃</button>');
+
+    // 장바구니와 마이페이지 버튼 표시
+    $('nav a[href="cart.html"]').show();
+    $('nav a:contains("마이페이지")').show();
+
+    // 로그아웃 버튼 이벤트
+    $(document).on('click', '.logout-button', function() {
+      localStorage.removeItem('loginMNO');
+      alert('로그아웃 되었습니다.');
+      location.reload();
+    });
+  } else {
+    // 비로그인 상태 → 장바구니와 마이페이지 버튼 숨김
+    $('nav a[href="cart.html"]').hide();
+    $('nav a:contains("마이페이지")').hide();
+  }
+}
