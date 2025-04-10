@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>북스토어</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -136,7 +137,7 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="bookListSection">
     <h2>도서 목록 조회</h2>
     <div class="genre-filter">
       <label for="genre">장르 선택: </label>
@@ -149,32 +150,8 @@
         <option value="history">역사</option>
       </select>
     </div>
-    <div class="book-list">
-      <div class="book" data-genre="fiction">
-        <img src="images/thistime.png" alt="The Time Has Come">
-        <p><strong>The Time Has Come</strong><br>$29.99</p>
-        <button class="cart-button">카트에 담기</button>
-      </div>
-      <div class="book" data-genre="fantasy">
-        <img src="images/cata.png" alt="I Want a Better Catastrophe">
-        <p><strong>I Want a Better Catastrophe</strong><br>$26.85</p>
-        <button class="cart-button">카트에 담기</button>
-      </div>
-      <div class="book" data-genre="non-fiction">
-        <img src="images/govern.png" alt="My Government Means To Kill Me">
-        <p><strong>My Government Means To Kill Me</strong><br>$18.00</p>
-        <button class="cart-button">카트에 담기</button>
-      </div>
-      <div class="book" data-genre="science">
-        <img src="images/midnight.png" alt="The Midnight Library">
-        <p><strong>The Midnight Library</strong><br>$22.00</p>
-        <button class="cart-button">카트에 담기</button>
-      </div>
-      <div class="book" data-genre="history">
-        <img src="images/pride.png" alt="Pride and Protest">
-        <p><strong>Pride and Protest</strong><br>$15.59</p>
-        <button class="cart-button">카트에 담기</button>
-      </div>
+    <div class="book-list" id="ajaxBookList">
+      <!-- AJAX로 불러온 책 목록이 여기에 표시됩니다 -->
     </div>
   </section>
 
