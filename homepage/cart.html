@@ -9,18 +9,28 @@
   <link rel="stylesheet" href="cart.css">
 </head>
 <body>
-<h1>🛒 장바구니</h1>
+  <h1>🛒 장바구니</h1>
 
-<div id="cart-list"></div> <!-- 장바구니 아이템 리스트를 표시할 영역 -->
+  <div id="cart-list"></div> <!-- 장바구니 아이템 리스트를 표시할 영역 -->
 
-<div class="cart-actions">
-<p id="total">총 합계: $0</p> <!-- 총 가격 표시 -->
-<div>
-<button id="clear-cart">전체 삭제</button> <!-- 전체 삭제 버튼 -->
-<button id="checkout">결제하기</button> <!-- 결제하기 버튼 -->
-</div>
-</div>
+  <!-- 주문 정보 -->
+  <div class="order">
+    <h2>주문 정보</h2>
+    <div class="member-info">
+      <p>구매자: <span id="member-name"></span></p>
+      <p>주소: <span id="member-address"></span></p>
+      <p>연락처: <span id="member-phone"></span></p>
+      <p>결제방법: <span id="payment-method"></span></p>
+    </div>  
+    <p class="total-price">총액: <span id="final-total"></span></p>
+  </div>
 
-<script src="cart.js"></script>
+  <!-- 버튼 영역 -->
+  <div class="action-buttons">
+    <button class="btn buy-btn" id="buyBtn">구매하기</button>
+    <button class="btn cancel-btn" id="cancelBtn">취소하기</button>
+  </div>
+
+  <script src="cart.js"></script>
 </body>
 </html>
