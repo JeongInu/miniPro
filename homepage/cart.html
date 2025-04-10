@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>장바구니</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    /* 기본 스타일 설정 */
+    body {
+      font-family: 'Noto Sans KR', sans-serif; /* 한글 폰트 적용 */
+      margin: 0;
+      padding: 2rem;
+      background-color: #fdf8f1; /* 배경색 설정 */
+    }
+
+    h1 {
+      text-align: center; /* 제목 중앙 정렬 */
+      margin-bottom: 2rem;
+      font-size: 2rem; /* 제목 크기 설정 */
+    }
+
+    /* 장바구니 아이템 스타일 */
+    .cart-item {
+      display: flex; /* 아이템을 가로로 배치 */
+      align-items: center;
+      background: #fff8ef; /* 아이템 배경색 */
+      border: 1px solid #ccc; /* 테두리 색상 및 두께 */
+      border-radius: 10px; /* 둥근 모서리 */
+      padding: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 그림자 효과 */
+    }
+
+    .cart-item img {
+      width: 80px; /* 이미지 크기 설정 */
+      height: auto;
+      border-radius: 8px; /* 이미지 모서리 둥글게 처리 */
+      margin-right: 1rem;
+    }
+
+    .cart-details {
+      flex-grow: 1; /* 상세 정보 영역 확장 */
+    }
+
+    .cart-details p {
+      margin: 0.2rem 0; /* 텍스트 간격 조정 */
+    }
+
+    /* 수량 조절 버튼 스타일 */
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem; /* 버튼 간격 설정 */
+      margin-top: 0.5rem;
+    }
+
+    .quantity-controls button {
+      padding: 0.3rem 0.7rem; /* 버튼 크기 설정 */
+      border: none;
+      background-color: #ebebeb; /* 버튼 배경색 */
+      border-radius: 6px; /* 버튼 모서리 둥글게 처리 */
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    /* 장바구니 하단 액션 영역 스타일 */
+    .cart-actions {
+      display: flex;
+      justify-content: space-between; /* 요소 간격 벌리기 */
+      align-items: center;
+      margin-top: 2rem;
+      border-top: 2px solid #ddd; /* 상단 경계선 추가 */
+      padding-top: 1rem;
+    }
+
+    .cart-actions button {
+      padding: 0.7rem 1.2rem; /* 버튼 크기 설정 */
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px; /* 버튼 모서리 둥글게 처리 */
+      cursor: pointer;
+    }
+
+    #checkout {
+      background-color: #ffa600; /* 결제하기 버튼 색상 */
+      color: white;
+    }
+
+    #clear-cart {
+      background-color: #bdbdbd; /* 전체 삭제 버튼 색상 */
+      color: white;
+    }
+
+    #total {
+      font-size: 1.2rem; /* 총 합계 텍스트 크기 설정 */
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<h1>🛒 장바구니</h1>
+
+<div id="cart-list"></div> <!-- 장바구니 아이템 리스트를 표시할 영역 -->
+
+<div class="cart-actions">
+<p id="total">총 합계: $0</p> <!-- 총 가격 표시 -->
+<div>
+<button id="clear-cart" onclick="clearCart()">전체 삭제</button> <!-- 전체 삭제 버튼 -->
+<button id="checkout" onclick="alert('결제 기능은 추후 구현됩니다!')">결제하기</button> <!-- 결제하기 버튼 -->
+</div>
+</div>
+
+<script>
+/* 페이지 로드 후 실행되는 코드 */
+window.addEventListener('DOMContentLoaded', () => {
+const cartList = document.getElementById('cart-list'); // 장바구니 리스트를 표시할 DOM 요소
+const cart = JSON.parse(localStorage.getItem('cart')) || []; // 로컬 스토리지에서 장바구니 데이터 가져오기
+
+if (cart.length === 0) { // 장바구니가 비어 있을 경우 메시지 표시
+cartList.innerHTML = '<p>장바구니가 비어 있습니다.</p>';
+return;
+}
+
+cart.forEach((item, index) => { // 장바구니 아이템을 반복하며 DOM에 추가
+const div = document.createElement('div');
+div.className = 'cart-item'; // 스타일 클래스 추가
+div.innerHTML = `
+<img src="${item.img}" alt="${item.title}" /> <!-- 상품 이미지 -->
+<div class="cart-details">
+<p><strong>${item.title}</strong></p> <!-- 상품 제목 -->
+<p>가격: $${item.price}</p> <!-- 상품 가격 -->
+<p>수량: ${item.quantity}</p> <!-- 상품 수량 -->
+<div class="quantity-controls">
+<button onclick="changeQty(${index}, 1)">+</button> <!-- 수량 증가 버튼 -->
+<button onclick="changeQty(${index}, -1)">-</button> <!-- 수량 감소 버튼 -->
+<button class="remove-button" onclick="removeItem(${index})">삭제</button> <!-- 아이템 삭제 버튼 -->
+</div>
+</div>
+`;
+cartList.appendChild(div); // 생성된 요소를 DOM에 추가
+});
+
+updateTotal(); // 총 합계 업데이트
+});
+
+/* 수량 변경 함수 */
+function changeQty(index, delta) {
+let cart = JSON.parse(localStorage.getItem('cart')); // 로컬 스토리지에서 데이터 가져오기
+cart[index].quantity += delta; // 수량 변경
+if (cart[index].quantity < 1) cart[index].quantity = 1; // 최소 수량 제한
+localStorage.setItem('cart', JSON.stringify(cart)); // 변경된 데이터를 다시 저장
+location.reload(); // 페이지 새로고침하여 UI 업데이트
+}
+
+/* 아이템 삭제 함수 */
+function removeItem(index) {
+let cart = JSON.parse(localStorage.getItem('cart')); // 로컬 스토리지에서 데이터 가져오기
+cart.splice(index, 1); // 해당 인덱스의 아이템 삭제
+localStorage.setItem('cart', JSON.stringify(cart)); // 변경된 데이터를 다시 저장
+location.reload(); // 페이지 새로고침하여 UI 업데이트
+}
+
+/* 전체 삭제 함수 */
+function clearCart() {
+localStorage.removeItem('cart'); // 로컬 스토리지에서 장바구니 데이터 제거
+location.reload(); // 페이지 새로고침하여 UI 업데이트
+}
+
+/* 총 합계 업데이트 함수 */
+function updateTotal() {
+const cart = JSON.parse(localStorage.getItem('cart')) || []; // 로컬 스토리지에서 데이터 가져오기
+const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0); // 총 가격 계산
+document.getElementById('total').innerText = `총 합계: $${total.toFixed(2)}`; // 화면에 총 가격 표시
+}
+</script>
+</body>
+</html>

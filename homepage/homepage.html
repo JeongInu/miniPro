@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>북스토어</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #fff;
+      color: #333;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-bottom: 2px solid #ccc;
+    }
+    header input[type="text"] {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    nav a, .login-button {
+      margin-left: 1rem;
+      text-decoration: none;
+      color: #333;
+    }
+    .section {
+      padding: 2rem;
+    }
+    .section h2 {
+      margin-bottom: 1rem;
+    }
+    .button {
+      background-color: #FFC107;
+      color: #000;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .book-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+    }
+    .book {
+      text-align: center;
+    }
+    .book img {
+      max-width: 100%;
+      height: auto;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .book .cart-button {
+      margin-top: 0.5rem;
+      padding: 0.3rem 0.8rem;
+      background-color: #f8be00;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .genre-filter {
+      margin-bottom: 1rem;
+    }
+    footer {
+      background-color: #f9f9f9;
+      padding: 2rem;
+      text-align: center;
+      border-top: 1px solid #ccc;
+    }
+    .book p a {
+     color: #693111;
+     font-weight: bold;
+     text-decoration: underline;
+    }
+    .subscribe {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    .subscribe input[type="email"] {
+      padding: 0.5rem;
+      width: 250px;
+      border: 1px solid #ccc;
+      border-radius: 4px 0 0 4px;
+    }
+    .subscribe button {
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: #FFC107;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+    }
+    .hidden {
+     opacity: 0;
+     transform: translateY(30px);
+     transition: all 0.6s ease-out;
+    }
+    .show {
+     opacity: 1;
+     transform: translateY(0);
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div><strong>📚 Bookstore</strong></div>
+    <nav>
+      <a href="#">마이페이지</a>
+      <a href="cart.html" class="button">🛒 장바구니</a>
+      <button class="login-button">로그인</button>
+    </nav>
+  </header>
+
+  <section class="section">
+    <h2>신간 도서</h2>
+    <p>최근 등록된 책들을 확인해보세요! 독특한 스토리와 함께 특별한 독서 경험을 제공합니다.</p>
+    <div class="book-list">
+      <div class="book">
+        <img src="images/cata.png" alt="I Want a Better Catastrophe">
+        <p><strong>I Want a Better Catastrophe</strong><br>$26.85</p>
+        <button class="cart-button">카트에 담기</button>
+      </div>
+      <div class="book">
+        <img src="images/govern.png" alt="My Government Means To Kill Me">
+        <p><strong>My Government Means To Kill Me</strong><br>$18.00</p>
+        <button class="cart-button">카트에 담기</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>도서 목록 조회</h2>
+    <div class="genre-filter">
+      <label for="genre">장르 선택: </label>
+      <select id="genre" name="genre">
+        <option value="all">전체</option>
+        <option value="fiction">소설</option>
+        <option value="non-fiction">비소설</option>
+        <option value="fantasy">판타지</option>
+        <option value="science">과학</option>
+        <option value="history">역사</option>
+      </select>
+    </div>
+    <div class="book-list">
+      <div class="book" data-genre="fiction">
+        <img src="images/thistime.png" alt="The Time Has Come">
+        <p><strong>The Time Has Come</strong><br>$29.99</p>
+        <button class="cart-button">카트에 담기</button>
+      </div>
+      <div class="book" data-genre="fantasy">
+        <img src="images/cata.png" alt="I Want a Better Catastrophe">
+        <p><strong>I Want a Better Catastrophe</strong><br>$26.85</p>
+        <button class="cart-button">카트에 담기</button>
+      </div>
+      <div class="book" data-genre="non-fiction">
+        <img src="images/govern.png" alt="My Government Means To Kill Me">
+        <p><strong>My Government Means To Kill Me</strong><br>$18.00</p>
+        <button class="cart-button">카트에 담기</button>
+      </div>
+      <div class="book" data-genre="science">
+        <img src="images/midnight.png" alt="The Midnight Library">
+        <p><strong>The Midnight Library</strong><br>$22.00</p>
+        <button class="cart-button">카트에 담기</button>
+      </div>
+      <div class="book" data-genre="history">
+        <img src="images/pride.png" alt="Pride and Protest">
+        <p><strong>Pride and Protest</strong><br>$15.59</p>
+        <button class="cart-button">카트에 담기</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>재입고 예정 상품</h2>
+    <div class="book-list">
+      <div class="book" data-genre="science">
+        <img src="images/forget.png" alt="Forget Me Not">
+        <p><strong>Forget Me Not</strong><br>$22.99</p>
+        <button class="cart-button">카트에 담기</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>배송방법</h2>
+    <div class="book-list">
+      <div class="book">
+        <p><a href="delivery-standard.html">일반배송 안내</a><br>전국 어디든 빠르고 안전하게 배송해 드립니다.</p>
+      </div>
+      <div class="book">
+        <p><a href="delivery-subway.html">지하철배송 안내</a><br>책을 지하철역에 보관해드립니다.</p>
+      </div>
+    </div>
+  </section>
+  
+
+  <footer>
+    <h3>계약 문의</h3>
+    <p>저희 판매 사이트와 계약을 원하시는 출판사는 이메일을 입력해주세요! 담당자가 연락드리겠습니다. </p>
+    <div class="subscribe">
+      <input type="email" placeholder="출판사 이메일 입력">
+      <button>send</button>
+    </div>
+  </footer>
+<script src="main.js"></script>
+</body>
+</html>
