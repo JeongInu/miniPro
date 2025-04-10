@@ -138,10 +138,10 @@ $(function () {
     $('#point-area').html(`
       <p id="balance-points">보유 포인트: <span>${balancePoints}</span></p>
       <p id="use-points">사용하실 포인트:
-        <input type="number" id="input-points" placeholder="사용하실 포인트" />
+        <input type="number" id="input-points" placeholder="사용하실 포인트" value="0" />
       </p>
       <span id="error-message" style="color: red; display: none;">사용할 포인트는 보유 포인트 초과 불가</span>
-      <p id="earn-points">적립예정 포인트: <span></span></p>
+      <p id="earn-points">적립예정 포인트: <span>${Math.floor(totalPrice * 0.01)}</span></p>
       <h3 id="final-price">최종 결제 금액 : ${formatCurrency(totalPrice)}</h3>
     `);
 
