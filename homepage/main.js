@@ -3,65 +3,179 @@
  */
 
 $(function() {
-  // 메인 페이지 기능 실행
+  // 메인 페이지 기능 초기화
   loadBooks();
   setupGenreFilter();
   setupEmailSubscription();
   setupScrollAnimation();
   setupCartButtons();
+  loadNewBooks();
+  loadBooksForRestock();
 });
 
-// 책 목록 불러오기 및 DOM에 렌더링
+// 책 관련 함수들
 function loadBooks() {
-  let allBooks = [];
-  // 실제 API에서 데이터 가져오기
-  $.get('http://localhost:3001/BOOK', function(books) {
-    allBooks = books;
-      renderBooks(books); // 전체 렌더링
-    }).fail(function(error) {
+  window.allBooks = [];
+  $.get('http://localhost:3001/BOOK')
+    .done(function(books) {
+      window.allBooks = books;
+      renderBooks(books);
+    })
+    .fail(function(error) {
       console.error('Failed to load books:', error);
       $('#ajaxBookList').html('<p>책 목록을 불러오는 데 실패했습니다. 잠시 후 다시 시도해주세요.</p>');
     });
+}
+
+function renderBooks(books) {
+  const $bookList = $('#ajaxBookList');
+  $bookList.empty();
+
+  if (books.length === 0) {
+    $bookList.append('<p>해당 장르의 책이 없습니다.</p>');
+    return;
+  }
+  
+  books.forEach(book => {
+    const finalPrice = Math.round(book.B_PRICE * (1 - book.SALE));
+    const bookHtml = `
+      <div class="book" data-genre="${book.B_CATE}" data-id="${book.BNO}">
+        <img src="images/${book.BNAME}.png" alt="${book.BNAME}" style="width:100px; height:auto;">
+        <p id="book-title"><strong>${book.BNAME}</strong></p>
+        <p>저자: ${book.B_WR}</p>
+        <p>가격: <del>₩${book.B_PRICE.toLocaleString()}</del> → <strong>₩${finalPrice.toLocaleString()}</strong></p>
+        <button class="cart-button">장바구니 담기</button>
+      </div>
+    `;
+    $bookList.append(bookHtml);
+  });
+}
+
+// 신간 도서 관련 함수들
+function loadNewBooks() {
+  $.get('http://localhost:3001/BOOK', function(books) {
+    window.allBooks = books;
+    filterNewBooks(3); // 기본값: 최근 3개월
+  });
+}
+
+function filterNewBooks(monthsAgo) {
+  const today = new Date();
+  const filtered = window.allBooks.filter(book => {
+    const bookDate = new Date(book.B_DATE);
+    const diffMonth = (today.getFullYear() - bookDate.getFullYear()) * 12 + today.getMonth() - bookDate.getMonth();
+    return diffMonth < monthsAgo;
+  });
+
+  renderNewBooks(filtered);
+}
+
+function renderNewBooks(books) {
+  const $list = $('#newBookList');
+  $list.empty();
+
+  if (books.length === 0) {
+    $list.append('<p>선택한 기간 내 신간 도서가 없습니다.</p>');
+    return;
   }
 
-  // 책 목록 렌더링 함수
-  function renderBooks(books) {
-    const $bookList = $('#ajaxBookList');
-    $bookList.empty();
+  books.forEach(book => {
+    const finalPrice = Math.round(book.B_PRICE * (1 - book.SALE));
+    const bookHtml = `
+      <div class="book" data-id="${book.BNO}">
+        <img src="images/${book.BNAME}.png" alt="${book.BNAME}" style="width:100px; height:auto;">
+        <p id="book-title"><strong>${book.BNAME}</strong><br>₩${finalPrice.toLocaleString()}</p>
+        <button class="cart-button">카트에 담기</button>
+      </div>
+    `;
+    $list.append(bookHtml);
+  });
+}
 
-    if (books.length === 0) {
-      $bookList.append('<p>해당 장르의 책이 없습니다.</p>');
-      return;
-    }
-    
-    // 책 데이터로 DOM 생성
-    $.each(books, function(index, book) {
-      const bookHtml = `
-        <div class="book" data-genre="${book.genre}">
-          <img src="${book.img}" alt="${book.title}" style="width:100px; height:auto;">
-          <p><strong>${book.title}</strong><br>$${book.price}</p>
-          <button class="cart-button">장바구니 담기</button>
-        </div>
-      `;
-      $bookList.append(bookHtml);
-    });
+// 재입고 예정 도서 관련 함수들
+function loadBooksForRestock() {
+  $.get('http://localhost:3001/BOOK', function(books) {
+    const outOfStockBooks = books.filter(book => book.STOCK === 0);
+    renderRestockBooks(outOfStockBooks);
+  });
+}
+
+function renderRestockBooks(books) {
+  const $list = $('#restockBookList');
+  $list.empty();
+
+  if (books.length === 0) {
+    $list.append('<p>현재 재입고 예정 도서가 없습니다.</p>');
+    return;
   }
 
-// 장바구니 버튼 이벤트 설정
+  books.forEach(book => {
+    const finalPrice = Math.round(book.B_PRICE * (1 - book.SALE));
+    const bookHtml = `
+      <div class="book" data-genre="${book.B_CATE}">
+        <img src="images/${book.BNAME}.png" alt="${book.BNAME}" style="width:100px; height:auto;">
+        <p id="book-title"><strong>${book.BNAME}</strong><br>₩${finalPrice.toLocaleString()}</p>
+        <button class="cart-button" disabled>재입고 대기중</button>
+      </div>
+    `;
+    $list.append(bookHtml);
+  });
+}
+
+// 이벤트 관련 설정 함수들
 function setupCartButtons() {
-  // 이벤트 위임을 통해 동적으로 생성된 요소에도 이벤트 연결
   $(document).on('click', '.cart-button', function() {
     const $book = $(this).closest('.book');
-    const title = $book.find('strong').text();
-    const priceText = $book.find('p').text();
-    const price = parseFloat(priceText.match(/\$([0-9.]+)/)[1]);
+    const title = $book.find('#book-title strong').text().trim();
+    const priceText = $book.find('p').last().text();
+    const priceMatch = priceText.match(/₩([\d,]+)/);
+    const price = priceMatch ? parseInt(priceMatch[1].replace(/,/g, '')) : 0;
     const img = $book.find('img').attr('src');
     
     addToCart(title, price, img);
   });
 }
 
-// 장바구니에 책 추가
+function setupGenreFilter() {
+  $('#genre').on('change', function() {
+    const selectedGenre = $(this).val();
+    if (selectedGenre === '전체') {
+      renderBooks(window.allBooks);
+    } else {
+      const filteredBooks = window.allBooks.filter(book => book.B_CATE === selectedGenre);
+      renderBooks(filteredBooks);
+    }
+  });
+}
+
+function setupScrollAnimation() {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        $(entry.target).addClass('show');
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  $('.section').each(function() {
+    $(this).addClass('hidden');
+    observer.observe(this);
+  });
+}
+
+function setupEmailSubscription() {
+  $('.subscribe button').on('click', function() {
+    const email = $('.subscribe input').val();
+    if (email) {
+      alert(`출판사 이메일 ${email}이(가) 등록되었습니다.`);
+      $('.subscribe input').val('');
+    } else {
+      alert('이메일을 입력해주세요.');
+    }
+  });
+}
+
+// 유틸리티 함수
 function addToCart(title, price, img) {
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -76,46 +190,8 @@ function addToCart(title, price, img) {
   alert(`${title}이(가) 장바구니에 담겼습니다.`);
 }
 
-// 장르 필터링
-function setupGenreFilter() {
-  $('#genre').on('change', function() {
-    const selectedGenre = $(this).val();
-    if (selectedGenre === 'all') {
-      renderBooks(allBooks);
-    } else {
-      const filteredBooks = allBooks.filter(book => book.genre === selectedGenre);
-      renderBooks(filteredBooks);
-    }
-  });
-}
-
-// 스크롤 애니메이션
-function setupScrollAnimation() {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        $(entry.target).addClass('show');
-      }
-    });
-  }, {
-    threshold: 0.1
-  });
-  
-  $('.section').each(function() {
-    $(this).addClass('hidden');
-    observer.observe(this);
-  });
-}
-
-// 이메일 구독
-function setupEmailSubscription() {
-  $('.subscribe button').on('click', function() {
-    const email = $('.subscribe input').val();
-    if (email) {
-      alert(`출판사 이메일 ${email}이(가) 등록되었습니다.`);
-      $('.subscribe input').val('');
-    } else {
-      alert('이메일을 입력해주세요.');
-    }
-  });
-}
+// 월 필터 설정
+$('#monthFilter').on('change', function() {
+  const selected = parseInt($(this).val());
+  filterNewBooks(selected);
+});
