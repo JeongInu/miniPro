@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>장바구니</title>
+  <link rel="stylesheet" type="text/css" href="basket.css">
+</head>
+<body>
+  
+  <div class="cart-contrainer">
+    <h1 class="cart-title">장바구니</h1>
+
+    <div class="cart-items">
+
+    </div>
+
+    <div class="order">
+      <h2>주문 정보</h2>
+      <div class="member-info">
+        <p>구매자: <span id="member-name"></span></p>
+        <p>주소: <span id="member-address"></span></p>
+        <p>연락처: <span id="member-phone"></span></p>
+        <p>결제방법: <span id="payment-method"></span></p>
+      </div>  
+      <p class="total-price">총액: </p>
+    </div>
+
+    <div class="action-buttons">
+      <button class="btn buy-btn" id="buyBtn">구매하기</button>
+      <button class="btn cancel-btn" id="cancelBtn">취소하기</button>
+    </div>
+
+  </div>  
+
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="basket.js"></script>
+</body>
+</html>
