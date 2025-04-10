@@ -90,8 +90,6 @@ toggleBtn.addEventListener('click', () => {
   }
 });
 
-fetch()
-
 $(function() {
   setupLoginStatus();
   loadBooks();
