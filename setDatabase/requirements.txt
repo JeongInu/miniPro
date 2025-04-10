@@ -1,1 +1,3 @@
 pip install cx_oracle
+npm install json-server
+pip install requests
