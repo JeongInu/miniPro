@@ -19,7 +19,7 @@ $(function () {
     }).then(function (members) {
       member = members.find(m => m.MNO === memberNo);
       if (member) {
-        $('#member-name').text(member.M_ID);
+        $('#member-name').text(member.M_NAME);
         $('#member-address').text(member.M_ADDR);
         $('#member-phone').text(member.M_HP);
         $('#payment-method').text(member.M_PAY);
