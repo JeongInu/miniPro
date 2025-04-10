@@ -197,25 +197,37 @@ $('#monthFilter').on('change', function() {
 });
 
 function setupLoginStatus() {
-  const loginMNO = localStorage.getItem('loginMNO'); // 로그인된 경우 저장되어 있어야 함
+  const loginMno = localStorage.getItem('loginMno'); // 로그인된 사용자 ID
 
-  if (loginMNO) {
-    // 로그인 상태 → 로그인 버튼을 로그아웃으로 변경
-    $('.login-button').replaceWith('<button class="logout-button">로그아웃</button>');
+  if (loginMno) {
+    // 로그인 상태
+    $('.login-button').hide(); // 로그인 버튼 숨김
+    $('nav a[href="cart.html"]').show(); // 장바구니 버튼 표시
+    $('nav a:contains("마이페이지")').show(); // 마이페이지 버튼 표시
 
-    // 장바구니와 마이페이지 버튼 표시
-    $('nav a[href="cart.html"]').show();
-    $('nav a:contains("마이페이지")').show();
+    // 로그아웃 버튼 추가 (중복 방지)
+    if (!$('.logout-button').length) {
+      $('nav').append('<a href="#" class="logout-button">로그아웃</a>');
+    }
 
     // 로그아웃 버튼 이벤트
-    $(document).on('click', '.logout-button', function() {
-      localStorage.removeItem('loginMNO');
+    $('.logout-button').off('click').on('click', function (e) {
+      e.preventDefault();
+      localStorage.removeItem('loginMno'); // 로그인 정보 삭제
       alert('로그아웃 되었습니다.');
-      location.reload();
+      location.reload(); // 페이지 새로고침
     });
   } else {
-    // 비로그인 상태 → 장바구니와 마이페이지 버튼 숨김
-    $('nav a[href="cart.html"]').hide();
-    $('nav a:contains("마이페이지")').hide();
+    // 비로그인 상태
+    $('.login-button').show(); // 로그인 버튼 표시
+    $('nav a[href="cart.html"]').hide(); // 장바구니 버튼 숨김
+    $('nav a:contains("마이페이지")').hide(); // 마이페이지 버튼 숨김
+    $('.logout-button').remove(); // 로그아웃 버튼 제거
+
+    // 로그인 버튼 이벤트
+    $('.login-button').off('click').on('click', function (e) {
+      e.preventDefault();
+      window.location.href = '../member/login.html'; // 로그인 페이지로 이동
+    });
   }
 }
