@@ -2,8 +2,7 @@
  * cart.js - 북스토어 장바구니 페이지 스크립트
  */
 
-$(function() {
-  // 장바구니 페이지 초기화
+$(function () {
   renderCartItems();
   setupCartButtons();
 });
@@ -12,25 +11,25 @@ $(function() {
 function renderCartItems() {
   const $cartList = $('#cart-list');
   if (!$cartList.length) return;
-  
+
   const cart = JSON.parse(localStorage.getItem('cart')) || [];
-  
+
   if (cart.length === 0) {
     $cartList.html('<p>장바구니가 비어 있습니다.</p>');
     updateTotal();
     return;
   }
-  
+
   $cartList.empty();
-  
-  // 카트 아이템 렌더링
+
   $.each(cart, function(index, item) {
     const $div = $('<div>').addClass('cart-item');
     $div.html(`
-      <img src="${item.img}" alt="${item.title}" />
+      <img src="images/${item.title}.png" alt="${item.title}" style="width:100px; height:auto;">
+
       <div class="cart-details">
         <p><strong>${item.title}</strong></p>
-        <p>가격: $${item.price}</p>
+        <p>가격: ₩${item.price.toLocaleString()}</p>
         <p>수량: ${item.quantity}</p>
         <div class="quantity-controls">
           <button class="increase-qty" data-index="${index}">+</button>
@@ -41,105 +40,81 @@ function renderCartItems() {
     `);
     $cartList.append($div);
   });
-  
+
   updateTotal();
 }
 
 // 장바구니 버튼 이벤트 설정
 function setupCartButtons() {
-  // 수량 증가 버튼
-  $(document).on('click', '.increase-qty', function() {
-    const index = $(this).data('index');
-    changeQuantity(index, 1);
+  $(document).on('click', '.increase-qty', function () {
+    changeQuantity($(this).data('index'), 1);
   });
-  
-  // 수량 감소 버튼
-  $(document).on('click', '.decrease-qty', function() {
-    const index = $(this).data('index');
-    changeQuantity(index, -1);
+
+  $(document).on('click', '.decrease-qty', function () {
+    changeQuantity($(this).data('index'), -1);
   });
-  
-  // 아이템 삭제 버튼
-  $(document).on('click', '.remove-button', function() {
-    const index = $(this).data('index');
-    removeItem(index);
+
+  $(document).on('click', '.remove-button', function () {
+    removeItem($(this).data('index'));
   });
-  
-  // 장바구니 비우기 버튼
-  $('#clear-cart').on('click', function() {
-    clearCart();
-  });
-  
-  // 결제하기 버튼
-  $('#checkout').on('click', function() {
-    processCheckout();
-  });
+
+  $('#clear-cart').on('click', clearCart);
+  $('#checkout').on('click', processCheckout);
 }
 
-// 수량 변경 함수
+// 수량 변경
 function changeQuantity(index, delta) {
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  
-  if (index >= 0 && index < cart.length) {
-    cart[index].quantity += delta;
-    
-    // 최소 수량은 1로 유지
-    if (cart[index].quantity < 1) {
-      cart[index].quantity = 1;
-    }
-    
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  if (cart[index]) {
+    cart[index].quantity = Math.max(1, cart[index].quantity + delta);
     localStorage.setItem('cart', JSON.stringify(cart));
     renderCartItems();
   }
 }
 
-// 아이템 삭제 함수
+// 아이템 삭제
 function removeItem(index) {
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  
-  if (index >= 0 && index < cart.length) {
-    const removedItem = cart[index];
-    cart.splice(index, 1);
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  if (cart[index]) {
+    const removed = cart.splice(index, 1)[0];
     localStorage.setItem('cart', JSON.stringify(cart));
-    
-    alert(`"${removedItem.title}"이(가) 장바구니에서 제거되었습니다.`);
+    alert(`"${removed.title}"이(가) 장바구니에서 제거되었습니다.`);
     renderCartItems();
   }
 }
 
-// 장바구니 비우기 함수
+// 장바구니 비우기
 function clearCart() {
   if (confirm('장바구니를 비우시겠습니까?')) {
     localStorage.removeItem('cart');
-    renderCartItems();
     alert('장바구니가 비워졌습니다.');
+    renderCartItems();
   }
 }
 
-// 결제 처리 함수
+// 결제 처리
 function processCheckout() {
   const cart = JSON.parse(localStorage.getItem('cart')) || [];
-  
-  if (cart.length === 0) {
+
+  if (!cart.length) {
     alert('장바구니가 비어 있습니다.');
     return;
   }
-  
+
   alert('결제가 완료되었습니다. 감사합니다!');
   localStorage.removeItem('cart');
   renderCartItems();
 }
 
-// 총 금액 계산 함수
+// 총 금액 계산 및 표시
 function calculateTotal(cart) {
-  return cart.reduce(function(total, item) {
-    return total + (item.price * item.quantity);
-  }, 0);
+  return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 }
 
-// 총 금액 표시 업데이트
 function updateTotal() {
   const cart = JSON.parse(localStorage.getItem('cart')) || [];
   const total = calculateTotal(cart);
-  $('#total').text(`총 합계: $${total.toFixed(2)}`);
+  $('#total').text(`총 합계: ₩${total.toLocaleString()}`);
 }
