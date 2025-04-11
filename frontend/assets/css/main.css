@@ -63,6 +63,12 @@ body {
     font-weight: bold;
     text-decoration: underline;
   }
+
+  .book a {
+    color: #693111; /* 원하는 색상으로 변경 */
+    font-weight: bold;
+    text-decoration: underline;
+}
   
   .subscribe {
     display: flex;

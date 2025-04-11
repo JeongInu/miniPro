@@ -1,0 +1,117 @@
+#bookDetail {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 30px;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    font-family: 'Noto Sans KR', sans-serif;
+    background: linear-gradient(135deg, #fff1e0, #ffffff);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#bookDetail:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+#bookDetail img {
+    display: block;
+    margin: 0 auto 20px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#bookDetail h1 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+#bookDetail p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+#bookDetail .price {
+    font-size: 1.4rem;
+    color: #ff8c20;
+    font-weight: bold;
+    text-align: center;
+    margin: 25px 0;
+}
+
+#bookDetail .original-price {
+    text-decoration: line-through;
+    color: #999;
+    margin-right: 10px;
+}
+
+#bookDetail .B_CATE, #bookDetail .SALE {
+    font-size: 1rem;
+    color: #34495e;
+    margin-top: 10px;
+    text-align: center;
+}
+
+#bookDetail .btn-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+#bookDetail .btn-container button {
+    background-color: #ff774e;
+    color: #fff;
+    font-size: 1rem;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#bookDetail .btn-container button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+#bookDetail .btn-container button:active {
+    transform: scale(0.95);
+}
+
+#bookDetail .description {
+    margin-top: 25px;
+    font-size: 1.1rem;
+    color: #444;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+@media (max-width: 768px) {
+    #bookDetail {
+        padding: 20px;
+    }
+
+    #bookDetail h1 {
+        font-size: 1.6rem;
+    }
+
+    #bookDetail p {
+        font-size: 1rem;
+    }
+
+    #bookDetail .price {
+        font-size: 1.2rem;
+    }
+
+    #bookDetail .btn-container button {
+        font-size: 0.9rem;
+        padding: 10px 15px;
+    }
+}
