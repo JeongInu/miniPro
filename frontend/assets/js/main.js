@@ -8,14 +8,6 @@ const carousel = document.getElementById('recomanded');
 const leftBtn = document.querySelector('.carousel-btn.left');
 const rightBtn = document.querySelector('.carousel-btn.right');
 
-leftBtn.addEventListener('click', () => {
-  carousel.scrollBy({ left: -300, behavior: 'smooth' });
-});
-
-rightBtn.addEventListener('click', () => {
-  carousel.scrollBy({ left: 300, behavior: 'smooth' });
-});
-
 async function handleRecomanded(){
   try{
     const response = await fetch(API_ADDR+"NAVER_BOOK");
@@ -149,7 +141,7 @@ function renderNewBooks(books) {
       <div class="book" data-id="${book.BNO}">
         <img src="/frontend/assets/images/${book.BNAME}.png" alt="${book.BNAME}" style="width:100px; height:auto;">
         <p id="book-title"><strong>${book.BNAME}</strong><br>₩${finalPrice.toLocaleString()}</p>
-        <button class="cart-button">카트에 담기</button>
+        <button class="cart-button">장바구니 담기</button>
       </div>
     `;
     $list.append(bookHtml);

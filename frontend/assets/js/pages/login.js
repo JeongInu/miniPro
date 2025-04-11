@@ -24,6 +24,7 @@ $(function () {
   
             if (member.M_ID === id && member.M_PW === passWord) {
               localStorage.setItem('loginMno', member.MNO); // 로그인한 회원번호 저장
+              localStorage.setItem('loginName',member.M_NAME);
               window.location.href = '/index.html';
               found = true;
               break;
@@ -51,4 +52,15 @@ $(function () {
         $('#loginBtn').click();
       }
     });
+  });
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const naverLogin = new naver.LoginWithNaverId({
+      clientId: 'HweKSxPk9GkzzKdrNaKN', // 네이버에서 발급받은 Client ID
+      callbackUrl: 'http://127.0.0.1:5500/frontend/pages/naver_callback.html',
+      isPopup: false,
+      loginButton: { color: 'green', type: 3, height: 45 } // 자동 생성 버튼 스타일
+    });
+  
+    naverLogin.init();
   });

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>네이버 로그인 콜백</title>
+  <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"></script>
+</head>
+<body>
+  <script>
+    const naverLogin = new naver.LoginWithNaverId({
+      clientId: 'HweKSxPk9GkzzKdrNaKN',
+      callbackUrl: window.location.href,
+      isPopup: false,
+      callbackHandle: true,
+    });
+
+    naverLogin.init();
+
+    window.addEventListener('load', function () {
+      naverLogin.getLoginStatus(function (status) {
+        if (status) {
+          const name = naverLogin.user.getName();
+          const email = naverLogin.user.getEmail();
+
+          localStorage.setItem('naver_user', JSON.stringify({ name, email }));
+          alert(`${name}님 네이버 로그인 성공!`);
+          localStorage.setItem('loginMno', 'naver');
+          window.location.href = '/index.html';
+        } else {
+          alert('네이버 로그인 실패!');
+          window.location.href = '/frontend/pages/login.html';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
