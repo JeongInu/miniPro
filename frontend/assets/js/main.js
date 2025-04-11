@@ -140,7 +140,7 @@ function renderNewBooks(books) {
       <div class="book" data-id="${book.BNO}">
         <img src="/frontend/assets/images/${book.BNAME}.png" alt="${book.BNAME}" style="width:100px; height:auto;">
         <p id="book-title"><strong>${book.BNAME}</strong><br>₩${finalPrice.toLocaleString()}</p>
-        <button class="cart-button">카트에 담기</button>
+        <button class="cart-button">장바구니 담기</button>
       </div>
     `;
     $list.append(bookHtml);

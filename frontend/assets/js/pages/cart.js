@@ -16,8 +16,10 @@ $(function () {
     const naverUser = JSON.parse(localStorage.getItem('naver_user'));
     console.log("i",naverUser);
     $('#member-name').text(naverUser.name);
-    $('#member-address').replaceWith('<input type="text" id="addr" placeholder="주소를 입력하세요./> ');
-    $('#member-phone').replaceWith('<input type="text" id="cp" placeholder="연락처를 입력하세요./> ');
+    $('#member-address').replaceWith('<input type="text" id="addr" placeholder="주소를 입력하세요."/> ');
+    $('#member-phone')
+      .prop('id','member-email')
+      .text(naverUser.email)
     $('#payment-method').text('네이버페이');
   }
 

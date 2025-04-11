@@ -24,6 +24,7 @@ $(function () {
   
             if (member.M_ID === id && member.M_PW === passWord) {
               localStorage.setItem('loginMno', member.MNO); // 로그인한 회원번호 저장
+              localStorage.setItem('loginName',member.M_NAME);
               window.location.href = '/index.html';
               found = true;
               break;
