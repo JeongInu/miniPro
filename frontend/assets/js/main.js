@@ -8,14 +8,6 @@ const carousel = document.getElementById('recomanded');
 const leftBtn = document.querySelector('.carousel-btn.left');
 const rightBtn = document.querySelector('.carousel-btn.right');
 
-leftBtn.addEventListener('click', () => {
-  carousel.scrollBy({ left: -300, behavior: 'smooth' });
-});
-
-rightBtn.addEventListener('click', () => {
-  carousel.scrollBy({ left: 300, behavior: 'smooth' });
-});
-
 async function handleRecomanded(){
   try{
     const response = await fetch(API_ADDR+"NAVER_BOOK");

@@ -10,7 +10,16 @@ $(function () {
 
   renderCartItems();
   setupCartButtons();
-  loadMemberInfo();
+  if(localStorage.getItem('loginMno') !== 'naver'){
+    loadMemberInfo();
+  }else{
+    const naverUser = JSON.parse(localStorage.getItem('naver_user'));
+    console.log("i",naverUser);
+    $('#member-name').text(naverUser.name);
+    $('#member-address').replaceWith('<input type="text" id="addr" placeholder="주소를 입력하세요./> ');
+    $('#member-phone').replaceWith('<input type="text" id="cp" placeholder="연락처를 입력하세요./> ');
+    $('#payment-method').text('네이버페이');
+  }
 
   function loadMemberInfo() {
     $.ajax({
@@ -84,6 +93,9 @@ $(function () {
 
     cancelBtn.on('click', function () {
       alert('구매를 취소합니다');
+      localStorage.removeItem('cart');
+      $('#point-area').remove(); 
+      renderCartItems();
     });
 
     buyBtn.on('click', showPointArea);

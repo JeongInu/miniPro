@@ -19,8 +19,10 @@ function updateLoginUI(isLoggedIn) {
     $('.logout-button').off('click').on('click', function (e) {
       e.preventDefault();
       localStorage.removeItem('loginMno');
+      localStorage.removeItem('naver_user');
       alert('로그아웃 되었습니다.');
       updateLoginUI(false); // 상태 업데이트
+      window.location.href = '/index.html';
     });
 
   } else {

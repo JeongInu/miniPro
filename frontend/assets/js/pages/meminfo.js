@@ -31,6 +31,12 @@ $(function () {
 
   // MNO가 존재하는지 확인
   if (memberNo) {
+    if(memberNo === 'naver'){
+      alert('네이버 회원님 서비스는 준비 중 입니다.ლ(╹◡╹ლ)');
+      window.location.href = '/index.html';
+      return;
+    }
+
     $.ajax({
       url: 'http://localhost:3001/MEMBER',
       method : 'GET',
