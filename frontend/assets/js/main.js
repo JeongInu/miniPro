@@ -90,15 +90,16 @@ function renderBooks(books) {
     $bookList.append('<p>해당 장르의 책이 없습니다.</p>');
     return;
   }
-  
+
   books.forEach(book => {
-    const finalPrice = Math.round(book.B_PRICE * (1 - book.SALE));
     const bookHtml = `
-      <div class="book" data-genre="${book.B_CATE}" data-id="${book.BNO}">
-        <img src="/frontend/assets/images/${book.BNAME}.png" alt="${book.BNAME}" style="width:100px; height:auto;">
-        <p id="book-title"><strong>${book.BNAME}</strong></p>
+      <div class="book" data-id="${book.BNO}">
+        <a href="/frontend/pages/book-detail.html?id=${book.BNO}">
+          <img src="/frontend/assets/images/${book.BNAME}.png" alt="${book.BNAME}" style="width:100px; height:auto;">
+          <p id="book-title"><strong>${book.BNAME}</strong></p>
+        </a>
         <p>저자: ${book.B_WR}</p>
-        <p>가격: <del>₩${book.B_PRICE.toLocaleString()}</del> → <strong>₩${finalPrice.toLocaleString()}</strong></p>
+        <p>가격: <del>₩${book.B_PRICE.toLocaleString()}</del> → <strong>₩${Math.round(book.B_PRICE * (1 - book.SALE)).toLocaleString()}</strong></p>
         <button class="cart-button">장바구니 담기</button>
       </div>
     `;
