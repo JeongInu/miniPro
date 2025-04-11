@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>장바구니</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/frontend/assets/css/pages/cart.css">
+</head>
+<body>
+  <header></header>
+  <h1>🛒 장바구니</h1>
+
+  <div id="cart-list"></div> <!-- 장바구니 아이템 리스트를 표시할 영역 -->
+
+  <!-- 주문 정보 -->
+  <div class="order">
+    <h2>주문 정보</h2>
+    <div class="member-info">
+      <p>구매자: <span id="member-name"></span></p>
+      <p>주소: <span id="member-address"></span></p>
+      <p>연락처: <span id="member-phone"></span></p>
+      <p>결제방법: <span id="payment-method"></span></p>
+    </div>  
+    <p class="total-price">총액: <span id="final-total"></span></p>
+  </div>
+
+  <!-- 버튼 영역 -->
+  <div class="action-buttons">
+    <button class="btn buy-btn" id="buyBtn">구매하기</button>
+    <button class="btn cancel-btn" id="cancelBtn">취소하기</button>
+  </div>
+  <footer></footer>
+  <script src="/frontend/assets/js/pages/cart.js"></script>
+  <script src="/frontend/assets/js/common.js"></script>
+</body>
+</html>

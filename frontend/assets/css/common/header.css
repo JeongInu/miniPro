@@ -1,0 +1,22 @@
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  padding: 1rem 2rem; /* 좌우 넉넉하게 */
+  min-height: 70px; /* 최소 높이 지정 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  z-index: 1001;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+}
+
+nav a, .login-button {
+  margin-left: 1rem;
+  text-decoration: none;
+  color: #333;
+}
