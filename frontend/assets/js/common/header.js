@@ -25,7 +25,7 @@ function updateLoginUI(isLoggedIn) {
 
   } else {
     $('.login-button').show();
-    $('nav a[href="cart.html"]').hide();
+    $('nav a[href="/frontend/pages/cart.html"]').hide();
     $('nav a:contains("마이페이지")').hide();
     $('.logout-button').remove();
 
