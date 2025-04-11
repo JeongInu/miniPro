@@ -1,0 +1,154 @@
+body {
+    margin: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #fff;
+    color: #333;
+    margin-bottom: 200px;
+    margin-top: 80px;
+  }
+
+.new-book-filter{
+  margin-bottom: 20px;
+}
+
+  .section {
+    padding: 2rem;
+  }
+  
+  .section h2 {
+    margin-bottom: 1rem;
+  }
+  
+  .button {
+    background-color: #FFC107;
+    color: #000;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .book-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+  
+  .book {
+    text-align: center;
+  }
+  
+  .book img {
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .book .cart-button {
+    margin-top: 0.5rem;
+    padding: 0.3rem 0.8rem;
+    background-color: #f8be00;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .genre-filter {
+    margin-bottom: 1rem;
+  }
+  
+  .book p a {
+    color: #693111;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+  
+  .subscribe {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .subscribe input[type="email"] {
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+  }
+  
+  .subscribe button {
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #FFC107;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+  }
+  
+  .hidden {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+  }
+  
+  .show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .recom-section {
+    padding: 0 3rem;
+    margin-bottom: 2rem;
+  }
+
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 1rem 3rem;
+    box-sizing: border-box;
+  }
+  
+  .book-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 1rem;
+  }
+  
+  .book-carousel::-webkit-scrollbar {
+    display: none; /* 스크롤바 숨기기 */
+  }
+  
+  .book-carousel .book {
+    flex: 0 0 auto;
+    width: 140px;
+    text-align: center;
+  }
+  
+  .book img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  
+  .carousel-btn {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.3rem 0.8rem;
+    z-index: 10;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  }
+  
+  .carousel-btn.left {
+    left: 0;
+  }
+  
+  .carousel-btn.right {
+    right: 0;
+  }
